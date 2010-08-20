@@ -1,10 +1,51 @@
 = Dsv
 
+A delimiter-separated values library for ruby.
+
 == Description
+
+Dsv provides support for an expanded delimiter-separated values format that
+supports basic data types, including arrays and hashes. The expanded syntax is
+intended to translate to and from JSON cleanly.
 
 == Usage
 
+Use like most serialization libraries:
+
+  require 'dsv'
+  
+  obj = {'key' => 'value'}
+  str = Dsv.dump(obj)          # => '{key:value}'
+  Dsv.load(str)                # => {'key' => 'value'}
+
+The syntax is delimiter-separated values, with additional support for basic types: nil, bool, numbers, strings, arrays, hashes.
+
+  simple  = ['a', 'b', 'c']
+  simple.to_dsv
+  # => '[a,b,c]'
+
+  complex = {
+    'nul' => nil,
+    'bol' => true,
+    'num' => 1, 
+    'str' => 'string',
+    'ary' => ['a', 'b', 'c'],
+    'hsh' => {'key' => 'value'}
+  }
+  
+  complex.to_dsv
+  # => '{nul:nil,bol:true,num:1,str:string,ary:[a,b,c],hsh:{key:value}}'
+
+Types are differentiated from strings based on the first character in the value.  Hash keys are always interpreted as strings for compatibility with JSON.
+
+  Dsv.load '[1,\1,{key:value},\{key:value}]'
+  # => [1, '1', {'key' => 'value'}, '{key:value}']
+
 == Installation
+
+Dsv is available as a gem through {Gemcutter}[http://rubygems.org/gems/dsv].
+
+  % gem install dsv
 
 == Info
 

@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.email = 'simon.a.chiang@gmail.com'
   s.homepage = ''
   s.platform = Gem::Platform::RUBY
-  s.summary = ''
+  s.summary = 'A delimiter-separated values library for ruby'
   s.require_path = 'lib'
   s.rubyforge_project = ''
   s.has_rdoc = true
